@@ -1,0 +1,264 @@
+# i3 config file (v4)
+# Please see http://i3wm.org/docs/userguide.html for a complete reference!
+
+set $mod Mod1
+set $meta Mod4
+
+################################################################################
+
+# start a terminal
+bindsym $meta+Return exec i3-sensible-terminal
+
+# kill focused window
+bindsym $meta+q kill
+
+# chromium
+bindsym $meta+c exec chromium
+
+# firefox
+bindsym $meta+m exec firefox
+
+# atom
+#bindsym $meta+a exec atom
+
+# sublime text 3
+bindsym $meta+s exec subl3
+
+# start spotify
+#bindsym $meta+s exec spotify
+
+# file manager
+bindsym $meta+e exec dolphin
+#bindsym $meta+e exec nautilus
+
+#start thunderbird
+bindsym $meta+t exec thunderbird
+
+# evince
+bindsym $meta+d exec evince
+# take a screenshot
+bindsym Print exec gnome-screenshot --interactive
+bindsym $meta+Print exec gnome-screenshot
+
+# lock
+bindsym $mod+l exec --no-startup-id i3exit lock
+bindsym $mod+shift+l exec --no-startup-id xtrlock
+
+# lock and suspend
+bindsym $mod+Delete exec --no-startup-id i3exit suspend lock
+
+# lock and hibernate
+bindsym $mod+Shift+Delete exec --no-startup-id i3exit hibernate lock 
+
+# start dmenu (a program launcher)
+bindsym $meta+Shift+r exec dmenu_run
+# There also is the (new) i3-dmenu-desktop which only displays applications
+# shipping a .desktop file. It is a wrapper around dmenu, so you need that
+# installed.
+bindsym $meta+r exec --no-startup-id i3-dmenu-desktop
+
+################################################################################
+
+# Pulse Audio controls
+#bindsym XF86AudioRaiseVolume exec --no-startup-id pavolume.sh --up
+#bindsym XF86AudioLowerVolume exec --no-startup-id pavolume.sh --down
+#bindsym XF86AudioMute exec --no-startup-id pavolume.sh --mute
+#bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute 1 toggle
+
+# ALSA controls
+bindsym XF86AudioRaiseVolume exec amixer sset Master 5%+
+bindsym XF86AudioLowerVolume exec amixer sset Master 5%-
+bindsym XF86AudioMute exec amixer sset Master toggle
+
+# switching between keyboards
+#bindsym $meta+space exec --no-startup-id switch_keyboard.sh normal
+#bindsym $mod+space exec --no-startup-id switch_keyboard.sh programming
+
+# update i3status after adjusting brightness
+#bindsym XF86MonBrightnessDown exec killall -USR1 i3status
+#bindsym XF86MonBrightnessUp exec killall -USR1 i3status
+
+# multihead screen
+bindsym XF86Display exec --no-startup-id multihead_screen.sh
+
+################################################################################
+
+# change focus
+bindsym $meta+h focus left
+bindsym $meta+j focus down
+bindsym $meta+k focus up
+bindsym $meta+l focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $meta+Left focus left
+bindsym $meta+Down focus down
+bindsym $meta+Up focus up
+bindsym $meta+Right focus right
+
+# move focused window
+bindsym $meta+Shift+h move left
+bindsym $meta+Shift+j move down
+bindsym $meta+Shift+k move up
+bindsym $meta+Shift+l move right
+
+# alternatively, you can use the cursor keys:
+bindsym $meta+Shift+Left move left
+bindsym $meta+Shift+Down move down
+bindsym $meta+Shift+Up move up
+bindsym $meta+Shift+Right move right
+
+# move focused workspace
+bindsym $meta+$mod+Left move workspace to output left
+bindsym $meta+$mod+Right move workspace to output right
+
+# enter fullscreen mode for the focused container
+bindsym $meta+f fullscreen toggle
+
+# split in horizontal orientation
+bindsym $meta+n split h
+
+# split in vertical orientation
+bindsym $meta+v split v
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+t layout tabbed
+bindsym $mod+w layout toggle split
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+bindsym $mod+c focus child
+
+# switch to workspace
+bindsym $meta+1 workspace 1
+bindsym $meta+2 workspace 2
+bindsym $meta+3 workspace 3
+bindsym $meta+4 workspace 4
+bindsym $meta+5 workspace 5
+bindsym $meta+6 workspace 6
+bindsym $meta+7 workspace 7
+bindsym $meta+8 workspace 8
+bindsym $meta+9 workspace 9
+bindsym $meta+0 workspace 10
+
+# move focused container to workspace
+bindsym $meta+Shift+1 move container to workspace 1
+bindsym $meta+Shift+2 move container to workspace 2
+bindsym $meta+Shift+3 move container to workspace 3
+bindsym $meta+Shift+4 move container to workspace 4
+bindsym $meta+Shift+5 move container to workspace 5
+bindsym $meta+Shift+6 move container to workspace 6
+bindsym $meta+Shift+7 move container to workspace 7
+bindsym $meta+Shift+8 move container to workspace 8
+bindsym $meta+Shift+9 move container to workspace 9
+bindsym $meta+Shift+0 move container to workspace 10
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+ctrl+space focus mode_toggle
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+################################################################################
+
+# reload the configuration file
+bindsym $mod+Shift+w reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+################################################################################
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym h resize shrink width 5 px or 5 ppt
+        bindsym j resize grow height 5 px or 5 ppt
+        bindsym k resize shrink height 5 px or 5 ppt
+        bindsym l resize grow width 5 px or 5 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 5 px or 5 ppt
+        bindsym Down resize grow height 5 px or 5 ppt
+        bindsym Up resize shrink height 5 px or 5 ppt
+        bindsym Right resize grow width 5 px or 5 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
+
+set $mode_system System (l) lock, (s) suspend, (h) hibernate, (r) reboot, (p) poweroff
+mode "$mode_system" {
+        bindsym l exec --no-startup-id i3exit lock, mode "default"
+        bindsym s exec --no-startup-id i3exit suspend, mode "default"
+        bindsym h exec --no-startup-id i3exit hibernate, mode "default"
+        bindsym r exec --no-startup-id i3exit reboot, mode "default"
+        bindsym p exec --no-startup-id i3exit poweroff, mode "default"
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+bindsym $mod+End mode "$mode_system"
+bindsym XF86Tools mode "$mode_system"
+
+################################################################################
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+bar {
+        #status_command /home/rlexmann/.config/i3/i3status_ext.sh
+        status_command i3status --config ~/.config/i3/i3status.conf
+        position top
+        font pango: Inconsolata 7.25
+        colors {
+                background #222222
+                statusline #dddddd
+                focused_workspace #990066 #660033 #ffffff
+                #focused_workspace #00a075 #007045 #ffffff
+        }
+}
+
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below.
+font pango:monospace 7.25
+
+# This font is widely installed, provides lots of unicode glyphs, right-to-left
+# text rendering and scalability on retina/hidpi displays (thanks to pango).
+#font pango:DejaVu Sans Mono 8
+
+# Before i3 v4.8, we used to recommend this one as the default:
+# font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+# The font above is very space-efficient, that is, it looks good, sharp and
+# clear in small sizes. However, its unicode glyph coverage is limited, the old
+# X core fonts rendering does not support right-to-left and this being a bitmap
+# font, it doesn’t scale on retina/hidpi displays.
+
+# Colors
+
+#class                  border  background      text    indicator       child_border
+#client.focused         #660033 #660033         #ffffff #cc0077         #660033
+#client.focused         #007045 #00a075         #ffffff #00e0b5         #00a075
+#client.focused         #333355 #333355         #ddddff #444477         #333355
+#client.focused         #ff3700 #7a2d18         #ffffff #ff734c         #ff3700
+client.focused          #990066 #660033         #ffffff #ff00aa         #cc0077
+client.focused_inactive #333333 #222222         #999999 #222222         #222222
+
+new_window pixel 2
+new_float normal
+for_window [class=".*"] border pixel 2
+
+#exec multihead_screen.sh
+#exec redshift-gtk &
